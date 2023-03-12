@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="25250caf-e13e-46de-850f-ea1393753867" name="Changes" comment="" />
+    <list default="true" id="25250caf-e13e-46de-850f-ea1393753867" name="Changes" comment="try to save this into github -.-" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -69,6 +69,25 @@
       <option name="presentableId" value="Default" />
       <updated>1678546589873</updated>
     </task>
+    <task id="LOCAL-00001" summary="try to save this into github -.-">
+      <created>1678623046048</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1678623046048</updated>
+    </task>
+    <task id="LOCAL-00002" summary="try to save this into github -.-">
+      <created>1678623259876</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1678623259877</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="try to save this into github -.-" />
+    <option name="LAST_COMMIT_MESSAGE" value="try to save this into github -.-" />
   </component>
 </project>
