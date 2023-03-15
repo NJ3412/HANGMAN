@@ -5,54 +5,122 @@
 
 
 import random
+import sys
+
 
 class Hangman:
 
     def __init__(self):
         self.name_players = []
         self.status_players ={}
+        self.display ={}
         self.word_dots = []
-        self.hidden = None
+        self.hidden = ""
         self.chances_players = []
+        self.ladila = []
 
 
     def pick_word(self):
-        words = ['baba']
+
+        words = ['baby', 'cat', 'dog', 'egg', 'fish', 'goat', 'hat', 'ice', 'jelly', 'kite',
+                     'lion', 'monkey', 'nest', 'owl', 'pig', 'queen', 'rabbit', 'sun', 'tree', 'umbrella',
+                     'van', 'whale', 'zebra']
+
         self.hidden = random.choice(words)
-        #weghalen 1
-        print(self.hidden)
+
         return self.hidden
+
+
+    def hangman_display(self):
+        self.display = {
+        'first': """
+                 |             
+                 |            
+                 |            
+                 |            
+                 |            
+                 |            
+                _|_
+                """,
+        'second' : """
+                 _________
+                 |       |             
+                 |           
+                 |            
+                 |            
+                 |            
+                 |            
+                _|_
+                """,
+        'third' : """
+                 _________
+                 |       |             
+                 |       O   
+                 |            
+                 |            
+                 |            
+                 |            
+                _|_
+                """,
+        'fourth' :  """
+                 _________
+                 |       |             
+                 |       O   
+                 |      \|/      
+                 |            
+                 |            
+                 |            
+                _|_
+                """,
+
+        'fifth' : """
+                 _________
+                 |       |             
+                 |       O   
+                 |      \|/      
+                 |       |     
+                 |            
+                 |            
+                _|_
+                """,
+        'sixth' : """
+                 _________
+                 |       |             
+                 |       O
+                 |     =====   
+                 |      \|/      
+                 |       |    
+                 |      / \     
+                 |            
+                _|_
+                """
+        }
+
 
     def players(self):
 
-        list_123 = ['first', 'second', 'third', 'forth', 'fifth', 'sixt']
-        print("welcome to the big Hangmanshow!")
+        list_123 = ['FIRST', 'SECOND', 'THIRD', 'FORTH', 'FIFTH', 'SIXTH']
+        print("\n\nWELCOME TO THE HANGMANSHOW!\n")
         self.name_players = []
         self.status_players = {}
 
         while True:
-            amount_players = input("amount players playing: ")
+            amount_players = input("AMOUNT PLAYERS:\n")
 
             try:
                 amount_players = int(amount_players)
                 break
 
             except ValueError:
-                print("sorry you didn't fill in a number, please try again")
+                print("NUMBER NO LETTER!")
 
 
         for a, b in zip(range(amount_players), list_123):
-            self.chances_players = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-            lala = input(f"What is the {b} name of the player?\n")
+            self.chances_players = [1, 2, 3, 4, 5, 6]
+            lala = input(f"\n{b} PLAYER NAME:\n")
             self.name_players.append(lala)
 
-        print(self.name_players)
-
         status_players = {item: self.chances_players for item in self.name_players}
-
-        for key, value in status_players.items():
-            print(key, value)
-
 
         return status_players
 
@@ -60,57 +128,79 @@ class Hangman:
 
     def game(self, hidden, status_players):
         positions = []
+        self.ladila = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth']
+        self.chances_doll = [1, 2, 3, 4, 5, 6]
 
-        print(f"Let's play the game "+", ".join(status_players.keys()) + ".")
-        # add 'and' for 2 or more players
 
 
         word_dots = ['.' for i in self.hidden];
-        print(word_dots)
 
 
-        modified_dots = " ".join(" ." for i in word_dots);
-        print(modified_dots)
 
+        while True:
+            for name, chances in status_players.items():
 
-        for name, chances in status_players.items():
+                modified_dots = " ".join(" ." for i in word_dots);
+                print(f"\n\n{modified_dots}")
 
-            letter = input(f"{name} guess a letter or the word:\n")
+                letter = input(f"\n{name} GUESS A LETTER/WORD: ")
+                modified_dots = " ".join(" ." for i in word_dots);
 
-            if len(letter) >1:
-                print("let me see if you guess the word right..")
+                if len(letter) >1:
 
-                if letter == hidden:
-                    print(f"YEAH the word is {hidden}")
-
-                else:
-                    status_players[name] = status_players[name][:-3]
-                    display_chance = len(status_players[name])
-                    print(f"wrong guess, you've lost 3 chances [{display_chance}/10]")
-
-                    for key, value in status_players.items():
-                        print(key, value)
-
-
-                    continue
-            else:
-
-                    if letter in self.hidden:
-                        print(f"Yes! letter {letter} is in the hidden word ")
-
-                        positions = (i for i in range(len(hidden)) if hidden[i] == letter)
-                        print(positions)
-
-                        [word_dots.__setitem__(i, letter) for i in positions];
-                        print(word_dots)
-
-                        modified_dots = " ".join(i for i in word_dots);
-                        print(modified_dots
-                        continue
-
+                    if letter == hidden:
+                        print(f"YOU WON!")
+                        break
 
                     else:
-                        print("n")
+                        status_players[name] = status_players[name][:-1]
+                        display_chance = len(status_players[name])
+                        print(f"WRONG! [{display_chance}/6]")
+
+                        for key, value in status_players.items():
+                            print(key, value)
+
+
+                        continue
+                else:
+
+                        if letter in self.hidden:
+                            print(f"\n\n      GOOD!")
+
+                            positions = (i for i in range(len(hidden)) if hidden[i] == letter)
+
+                            [word_dots.__setitem__(i, letter) for i in positions];
+
+                            modified_dots = " ".join(i for i in word_dots);
+                            print(modified_dots)
+                            continue
+
+
+                        else:
+
+                            status_players[name] = status_players[name][:-1]
+                            self.chances_doll.pop()
+                            display_chance = len(status_players[name])
+
+
+
+                            if self.ladila[0] in self.display:
+                                print(f"\n{self.display[self.ladila[0]]}")
+                                self.ladila.pop(0)
+
+                            print("WRONG!\n")
+                            print(f"{name.capitalize()} TOTAL CHANCES: {display_chance}/6")
+                            print(f"HANGMAN TOTAL CHANCES: {len(self.chances_doll)}/6\n")
+
+                            if len(self.ladila) <= 0:
+                                 print(f"YOU BOTH LOST, LOSERS!")
+                                 print(f"WORD WAS: {hidden.capitalize()}")
+                                 sys.exit()
+
+
+
+
+                            continue
 
 
 
